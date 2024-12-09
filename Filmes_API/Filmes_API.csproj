@@ -28,4 +28,8 @@
         <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="7.1.0" />
     </ItemGroup>
 
+    <ItemGroup>
+        <InternalsVisibleTo Include="Filmes_API.Test" />
+    </ItemGroup>
+    
 </Project>
