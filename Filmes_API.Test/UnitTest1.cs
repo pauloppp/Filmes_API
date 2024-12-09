@@ -5,7 +5,7 @@ using System.Net.Http.Json;
 
 namespace Filmes_API.Test
 {
-    public class EFCoreInMemoryIntegrationTests
+    public class Filmes_API_IntegrationTests
     {
         [Test]
         public async Task GET_Retornar_Intervalo_Filmes()
