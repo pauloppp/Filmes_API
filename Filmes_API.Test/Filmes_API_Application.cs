@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Filmes_API.Test
 {
-    public class EFCore_In_Memory_Application : WebApplicationFactory<Program>
+    public class Filmes_API_Application : WebApplicationFactory<Program>
     {
         protected override IHost CreateHost(IHostBuilder builder)
         {
