@@ -1,4 +1,5 @@
 using Filmes_API.Context;
+using Filmes_API.Utils;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -8,6 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Banco de dados InMemory
 builder.Services.AddDbContext<ApiContext>(opt => opt.UseInMemoryDatabase("Oscar"));
+
+// Dependências
+builder.Services.ResolverDependencias();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -26,6 +30,11 @@ builder.Services.AddSwaggerGen(
 );
 
 var app = builder.Build();
+
+// Pega o context e salva dados iniciais no banco.
+var scopo = app.Services.CreateScope();
+ApiContext context = scopo.ServiceProvider.GetRequiredService<ApiContext>();
+CommonServices.AdicionarDadosIniciais(context);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
