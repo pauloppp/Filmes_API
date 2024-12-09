@@ -1,0 +1,46 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Filmes_API.Context;
+using Filmes_API.Models;
+using Swashbuckle.AspNetCore.Annotations;
+using NuGet.Protocol.Core.Types;
+using Filmes_API.Repositories.Interfaces;
+
+namespace Filmes_API.Controllers
+{
+    [Route("api/v1/[controller]")]
+    [ApiController]
+    [Consumes("application/json")]
+    [Produces("application/json")]
+    public class ErrosController : ControllerBase
+    {
+        private readonly IErroService _service;
+
+        public ErrosController(IErroService service)
+        {
+            _service = service;
+        }
+
+        // GET: api/v1/Erros/GetErros
+        [HttpGet]
+        [Route("GetErros")]
+        [ProducesResponseType(typeof(Intervalo), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Intervalo), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(Intervalo), StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(Summary = "Obter lista de erros no processamento do arquivo [.csv]")]
+        public async Task<ActionResult<IEnumerable<Erro>>> GetErros()
+        {
+            var errosProcessados = _service.GetErros();
+            if (errosProcessados is null)
+            {
+                return NotFound("Lista de erros no processamento inexistente");
+            }
+            return Ok(errosProcessados.Result);
+        }
+    }
+}
