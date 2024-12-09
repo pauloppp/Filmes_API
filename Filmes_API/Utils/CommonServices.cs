@@ -43,7 +43,6 @@ namespace Filmes_API.Utils
                 {
                     while (!reader.EndOfStream)
                     {
-
                         var line = reader.ReadLine();
                         var values = line.Split(',');
 
