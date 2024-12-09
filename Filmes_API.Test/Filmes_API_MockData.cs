@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Filmes_API.Test
 {
-    public class EFCore_In_Memory_MockData
+    public class Filmes_API_MockData
     {
-        public static async Task CreateFilmes(EFCore_In_Memory_Application application, bool create)
+        public static async Task CreateFilmes(Filmes_API_Application application, bool create)
         {
             using (var scope = application.Services.CreateScope())
             {
