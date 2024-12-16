@@ -34,7 +34,8 @@ var app = builder.Build();
 // Pega o context e salva dados iniciais no banco.
 var scopo = app.Services.CreateScope();
 ApiContext context = scopo.ServiceProvider.GetRequiredService<ApiContext>();
-CommonServices.AdicionarDadosIniciais(context);
+var nomeFilme = string.Empty;
+CommonServices.AdicionarDadosIniciais(context, nomeFilme);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

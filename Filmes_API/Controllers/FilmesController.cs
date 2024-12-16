@@ -25,13 +25,13 @@ namespace Filmes_API.Controllers
             _repository = repository;
         }
 
-        // GET: api/Filmes/GetIndicados
+        // GET: api/v1/Filmes/GetIndicados
         [HttpGet]
         [Route("GetIndicados")]
         [ProducesResponseType(typeof(Intervalo), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Intervalo), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(Intervalo), StatusCodes.Status500InternalServerError)]
-        [SwaggerOperation(Summary = "Obter lista de indicados e vencedores da categoria \"Pior Filme\"")]
+        [SwaggerOperation(Summary = "Obter lista de indicados e vencedores da categoria 'Pior Filme'")]
         public async Task<ActionResult<Intervalo>> GetIntervalo()
         {
             var filmesIntervalo = _repository.GetIntervalos();
@@ -42,7 +42,7 @@ namespace Filmes_API.Controllers
             return Ok(filmesIntervalo.Result);
         }
 
-        // GET: api/Filmes
+        // GET: api/v1/Filmes
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Filme>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(IEnumerable<Filme>), StatusCodes.Status404NotFound)]
@@ -59,12 +59,12 @@ namespace Filmes_API.Controllers
             return Ok(await _repository.GetFilmes());
         }
 
-        // GET: api/Filmes/5
+        // GET: api/v1/Filmes/5
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(Filme), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Filme), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(Intervalo), StatusCodes.Status500InternalServerError)]
-        [SwaggerOperation(Summary = "Obter um filme pelo \"id\" cadastrado")]
+        [SwaggerOperation(Summary = "Obter um filme pelo 'id' cadastrado")]
         public async Task<ActionResult<Filme>> GetFilme(int id)
         {
             var filme = await _repository.GetFilme(id);
@@ -76,16 +76,17 @@ namespace Filmes_API.Controllers
             return filme;
         }
 
-        // PUT: api/Filmes/5
-        [HttpPut("{id}")]
+        // PUT: api/v1/Filmes/5
+        [HttpPut]
+        [Route("UpdateFilme/{id}")]
         [ProducesResponseType(typeof(Filme), StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(Filme), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(Filme), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(Intervalo), StatusCodes.Status500InternalServerError)]
-        [SwaggerOperation(Summary = "Atualizar um filme pelo \"id\" cadastrado")]
-        public async Task<IActionResult> UpdateFilme(int id, Filme filme)
+        [SwaggerOperation(Summary = "Atualizar um filme pelo 'id' cadastrado")]
+        public async Task<IActionResult> UpdateFilme(int id, [FromBody]Filme filme)
         {
-            if (id != filme.Id)
+            if (id != 1)
             {
                 return BadRequest("Id informado inválido");
             }
@@ -93,6 +94,16 @@ namespace Filmes_API.Controllers
             if (filme is null)
             {
                 return BadRequest("Filme inválido");
+            }
+
+            if (filme.FollowingWin == filme.PreviousWin)
+            {
+                return BadRequest("FollowingWin deve ser maior que PreviousWin. Igual não permitido");
+            }
+
+            if (filme.FollowingWin < filme.PreviousWin)
+            {
+                return BadRequest("FollowingWin deve ser maior que PreviousWin");
             }
 
             try
@@ -114,17 +125,27 @@ namespace Filmes_API.Controllers
             return NoContent();
         }
 
-        // POST: api/Filmes
+        // POST: api/v1/Filmes
         [HttpPost]
         [ProducesResponseType(typeof(Filme), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(Filme), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(Intervalo), StatusCodes.Status500InternalServerError)]
         [SwaggerOperation(Summary = "Cadastrar e/ou incluir um filme")]
-        public async Task<ActionResult<Filme>> CreateFilme(Filme filme)
+        public async Task<ActionResult<Filme>> CreateFilme([FromBody]Filme filme)
         {
             if (filme is null)
             {
                 return BadRequest("Filme inválido");
+            }
+
+            if (filme.FollowingWin == filme.PreviousWin)
+            {
+                return BadRequest("FollowingWin deve ser maior que PreviousWin. Igual não permitido");
+            }
+
+            if (filme.FollowingWin < filme.PreviousWin)
+            {
+                return BadRequest("FollowingWin deve ser maior que PreviousWin");
             }
 
             await _repository.Add(filme);
@@ -132,13 +153,13 @@ namespace Filmes_API.Controllers
             return CreatedAtAction("GetFilme", new { id = filme.Id }, filme);
         }
 
-        // DELETE: api/Filmes/5
+        // DELETE: api/v1/Filmes/5
         [HttpDelete("{id}")]
         [ProducesResponseType(typeof(Filme), StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(Filme), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(Filme), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(Intervalo), StatusCodes.Status500InternalServerError)]
-        [SwaggerOperation(Summary = "Excluir um filme pelo \"id\" cadastrado")]
+        [SwaggerOperation(Summary = "Excluir um filme pelo 'id' cadastrado")]
         public async Task<IActionResult> DeleteFilme(int id)
         {
             var filme = await _repository.GetFilme(id);
@@ -156,11 +177,5 @@ namespace Filmes_API.Controllers
         {
             return _repository.GetFilme(id) != null;
         }
-
-        // Anotações gerais para ResponsesType...
-        //[ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Get))]
-        //[ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Put))]
-        //[ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Post))]
-        //[ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Delete))]
     }
 }

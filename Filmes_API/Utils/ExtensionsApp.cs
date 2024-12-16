@@ -1,5 +1,7 @@
 ﻿using Filmes_API.Repositories.Concretes;
 using Filmes_API.Repositories.Interfaces;
+using Filmes_API.Services.Concretes;
+using Filmes_API.Services.Interfaces;
 
 namespace Filmes_API.Utils
 {

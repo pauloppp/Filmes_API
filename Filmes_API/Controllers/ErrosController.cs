@@ -9,7 +9,7 @@ using Filmes_API.Context;
 using Filmes_API.Models;
 using Swashbuckle.AspNetCore.Annotations;
 using NuGet.Protocol.Core.Types;
-using Filmes_API.Repositories.Interfaces;
+using Filmes_API.Services.Interfaces;
 
 namespace Filmes_API.Controllers
 {

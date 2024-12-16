@@ -1,9 +1,10 @@
 ﻿using Filmes_API.Models;
 
-namespace Filmes_API.Repositories.Interfaces
+namespace Filmes_API.Services.Interfaces
 {
     public interface IErroService
     {
         Task<IEnumerable<Erro>> GetErros();
+        Task<Erro> Create(Erro erro);
     }
 }
