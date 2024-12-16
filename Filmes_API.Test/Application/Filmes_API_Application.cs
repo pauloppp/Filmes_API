@@ -12,7 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Filmes_API.Test
+namespace Filmes_API.Test.Application
 {
     public class Filmes_API_Application : WebApplicationFactory<Program>
     {

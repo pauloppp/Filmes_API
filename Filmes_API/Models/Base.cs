@@ -5,7 +5,7 @@ namespace Filmes_API.Models
 {
     public class Base
     {
-        [JsonIgnore]
+        //[JsonIgnore]
         public int Id { get; set; }
     }
 }

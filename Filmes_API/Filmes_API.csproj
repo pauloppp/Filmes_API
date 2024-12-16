@@ -11,7 +11,34 @@
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Include="Data\Filmes.csv">
+      <EmbeddedResource Include="Data\Principal\Filmes_20241215.csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Data\Principal\Filmes.csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Data\Tests\Filmes_Arquivo_Processado_Com_Successo.csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Data\Tests\Filmes_Arquivo_Vazio_Invalido.csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Data\Tests\Filmes_Arquivo_Incompleto.csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Data\Tests\Filmes_FollowingWin_Menor_PreviousWin_Linha1.csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Data\Tests\Filmes_FollowingWin_Igual_PreviousWin_Linha1.csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Data\Tests\Filmes_SemFollowingWin_Linha1.csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Data\Tests\Filmes_SemPreviousWin_Linha1.csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Data\Tests\Filmes_SemProducer_Linha1.csv">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
     </ItemGroup>

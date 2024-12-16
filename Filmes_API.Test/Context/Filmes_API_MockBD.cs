@@ -1,4 +1,5 @@
 ﻿using Filmes_API.Context;
+using Filmes_API.Test.Application;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -6,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Filmes_API.Test
+namespace Filmes_API.Test.Context
 {
-    public class Filmes_API_MockData
+    public class Filmes_API_MockBD
     {
         public static async Task CreateFilmes(Filmes_API_Application application, bool create)
         {
@@ -19,7 +20,7 @@ namespace Filmes_API.Test
                 {
                     await apiContext.Database.EnsureCreatedAsync();
 
-                    if (create) 
+                    if (create)
                     {
                         //await apiContext.Filmes.AddAsync(new Models.Filme
                         //{ Producer = "Producer1_t", PreviousWin = 2008, FollowingWin = 2009, Interval = 1 });

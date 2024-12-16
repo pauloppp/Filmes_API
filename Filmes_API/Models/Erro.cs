@@ -16,5 +16,13 @@ namespace Filmes_API.Models
         [Required]
         [SwaggerSchema(Description = "Origem do erro")]
         public string? Origem { get; set; }
+
+        [Required]
+        [SwaggerSchema(Description = "Arquivo processado")]
+        public string? Arquivo { get; set; }
+
+        [Required]
+        [SwaggerSchema(Description = "Filme processado")]
+        public Filme? Filme { get; set; }
     }
 }
