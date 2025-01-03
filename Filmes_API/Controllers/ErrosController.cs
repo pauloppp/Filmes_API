@@ -27,20 +27,39 @@ namespace Filmes_API.Controllers
         }
 
         // GET: api/v1/Erros/GetErros
+        //[HttpGet]
+        //[Route("GetErros")]
+        //[ProducesResponseType(typeof(Erro), StatusCodes.Status200OK)]
+        //[ProducesResponseType(typeof(Erro), StatusCodes.Status404NotFound)]
+        //[ProducesResponseType(typeof(Erro), StatusCodes.Status500InternalServerError)]
+        //[SwaggerOperation(Summary = "Obter lista de erros no processamento do arquivo [.csv]")]
+        //public async Task<ActionResult<IEnumerable<Erro>>> GetErros()
+        //{
+        //    var errosProcessados = _service.GetErros();
+        //    if (errosProcessados is null)
+        //    {
+        //        return NotFound("Lista de erros no processamento inexistente");
+        //    }
+        //    return Ok(errosProcessados.Result);
+        //}
+
+
+        // GET: api/v1/Erros/GetErros
         [HttpGet]
         [Route("GetErros")]
         [ProducesResponseType(typeof(Erro), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Erro), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(Erro), StatusCodes.Status500InternalServerError)]
         [SwaggerOperation(Summary = "Obter lista de erros no processamento do arquivo [.csv]")]
-        public async Task<ActionResult<IEnumerable<Erro>>> GetErros()
+        public async Task<ActionResult<List<Erro>>> GetErros()
         {
-            var errosProcessados = _service.GetErros();
+            var errosProcessados = _service.GetErros_2();
             if (errosProcessados is null)
             {
                 return NotFound("Lista de erros no processamento inexistente");
             }
             return Ok(errosProcessados.Result);
         }
+
     }
 }

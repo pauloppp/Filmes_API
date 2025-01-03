@@ -20,7 +20,7 @@ namespace Filmes_API.Test.Context
         public async Task GET_Retornar_IntervaloFilmes_Valido()
         {
             await using var application = new Filmes_API_Application();
-            await Filmes_API_MockBD.CreateFilmes(application, true);
+            await Filmes_API_MockDB.CreateFilmes(application, true);
             var url = "api/v1/filmes/GetIndicados";
             var client = application.CreateClient();
             var result = await client.GetAsync(url);
@@ -36,7 +36,7 @@ namespace Filmes_API.Test.Context
         public async Task GET_Retornar_IntervaloFilmes_Invalido()
         {
             await using var application = new Filmes_API_Application();
-            await Filmes_API_MockBD.CreateFilmes(application, true);
+            await Filmes_API_MockDB.CreateFilmes(application, true);
             var url = "api/v1/filmes/GetIndicadoss";
             var client = application.CreateClient();
             var result = await client.GetAsync(url);
@@ -50,7 +50,7 @@ namespace Filmes_API.Test.Context
         public async Task GET_Retornar_Filmes_Todos_NaoNulo()
         {
             await using var application = new Filmes_API_Application();
-            await Filmes_API_MockBD.CreateFilmes(application, true);
+            await Filmes_API_MockDB.CreateFilmes(application, true);
             var url = "api/v1/filmes";
             var client = application.CreateClient();
             var result = await client.GetAsync(url);
@@ -65,7 +65,7 @@ namespace Filmes_API.Test.Context
         public async Task GET_Retornar_Filmes_Todos_Nulo()
         {
             await using var application = new Filmes_API_Application();
-            await Filmes_API_MockBD.CreateFilmes(application, true);
+            await Filmes_API_MockDB.CreateFilmes(application, true);
             var url = "api/v1/filmess";
             var client = application.CreateClient();
             var result = await client.GetAsync(url);
@@ -79,7 +79,7 @@ namespace Filmes_API.Test.Context
         public async Task GET_Retornar_Filme_PorId_NaoNulo()
         {
             await using var application = new Filmes_API_Application();
-            await Filmes_API_MockBD.CreateFilmes(application, true);
+            await Filmes_API_MockDB.CreateFilmes(application, true);
             var url = "api/v1/filmes/1";
             var client = application.CreateClient();
             var result = await client.GetAsync(url);
@@ -94,7 +94,7 @@ namespace Filmes_API.Test.Context
         public async Task GET_Retornar_Filme_PorId_Nulo()
         {
             await using var application = new Filmes_API_Application();
-            await Filmes_API_MockBD.CreateFilmes(application, true);
+            await Filmes_API_MockDB.CreateFilmes(application, true);
             var url = "api/v1/filmes/9999999";
             var client = application.CreateClient();
             var result = await client.GetAsync(url);
@@ -108,7 +108,7 @@ namespace Filmes_API.Test.Context
         public async Task PUT_Atualizar_Filme_PorId_Valido()
         {
             await using var application = new Filmes_API_Application();
-            await Filmes_API_MockBD.CreateFilmes(application, true);
+            await Filmes_API_MockDB.CreateFilmes(application, true);
 
             var id = 1;
             var url = $"api/v1/filmes/UpdateFilme/{id}";
@@ -119,6 +119,7 @@ namespace Filmes_API.Test.Context
             filme.FollowingWin = 2008;
             filme.Interval = 1;
             filme.Id = 1;
+            filme.Arquivo = "Arquivo.tes";
 
             var jsonStr = Newtonsoft.Json.JsonConvert.SerializeObject(filme, Newtonsoft.Json.Formatting.Indented);
             HttpContent content = new StringContent(jsonStr, Encoding.UTF8, "application/json");
@@ -134,7 +135,7 @@ namespace Filmes_API.Test.Context
         public async Task PUT_Atualizar_Filme_PorId_Invalido()
         {
             await using var application = new Filmes_API_Application();
-            await Filmes_API_MockBD.CreateFilmes(application, true);
+            await Filmes_API_MockDB.CreateFilmes(application, true);
 
             var id = 9999;
             var url = $"api/v1/filmes/UpdateFilme/{id}";
@@ -145,6 +146,7 @@ namespace Filmes_API.Test.Context
             filme.FollowingWin = 2008;
             filme.Interval = 1;
             filme.Id = 1;
+            filme.Arquivo = "Arquivo.tes";
 
             var jsonStr = Newtonsoft.Json.JsonConvert.SerializeObject(filme, Newtonsoft.Json.Formatting.Indented);
             HttpContent content = new StringContent(jsonStr, Encoding.UTF8, "application/json");
@@ -163,7 +165,7 @@ namespace Filmes_API.Test.Context
         public async Task PUT_Atualizar_Filme_PorId_FilmeNull()
         {
             await using var application = new Filmes_API_Application();
-            await Filmes_API_MockBD.CreateFilmes(application, true);
+            await Filmes_API_MockDB.CreateFilmes(application, true);
 
             var id = 1;
             var url = $"api/v1/filmes/UpdateFilme/{id}";
@@ -184,7 +186,7 @@ namespace Filmes_API.Test.Context
         public async Task PUT_Atualizar_Filme_PorId_FollowingWin_Igual_PreviousWin()
         {
             await using var application = new Filmes_API_Application();
-            await Filmes_API_MockBD.CreateFilmes(application, true);
+            await Filmes_API_MockDB.CreateFilmes(application, true);
 
             var id = 1;
             var url = $"api/v1/filmes/UpdateFilme/{id}";
@@ -195,6 +197,7 @@ namespace Filmes_API.Test.Context
             filme.FollowingWin = 2007;
             filme.Interval = 1;
             filme.Id = 1;
+            filme.Arquivo = "Arquivo.tes";
 
             var jsonStr = Newtonsoft.Json.JsonConvert.SerializeObject(filme, Newtonsoft.Json.Formatting.Indented);
             HttpContent content = new StringContent(jsonStr, Encoding.UTF8, "application/json");
@@ -213,7 +216,7 @@ namespace Filmes_API.Test.Context
         public async Task PUT_Atualizar_Filme_PorId_FollowingWin_Menor_PreviousWin()
         {
             await using var application = new Filmes_API_Application();
-            await Filmes_API_MockBD.CreateFilmes(application, true);
+            await Filmes_API_MockDB.CreateFilmes(application, true);
 
             var id = 1;
             var url = $"api/v1/filmes/UpdateFilme/{id}";
@@ -224,6 +227,7 @@ namespace Filmes_API.Test.Context
             filme.FollowingWin = 2006;
             filme.Interval = 1;
             filme.Id = 1;
+            filme.Arquivo = "Arquivo.tes";
 
             var jsonStr = Newtonsoft.Json.JsonConvert.SerializeObject(filme, Newtonsoft.Json.Formatting.Indented);
             HttpContent content = new StringContent(jsonStr, Encoding.UTF8, "application/json");
@@ -242,7 +246,7 @@ namespace Filmes_API.Test.Context
         public async Task POST_Cadastrar_Filme_Valido()
         {
             await using var application = new Filmes_API_Application();
-            await Filmes_API_MockBD.CreateFilmes(application, true);
+            await Filmes_API_MockDB.CreateFilmes(application, true);
            
             var url = $"api/v1/filmes/";
 
@@ -251,7 +255,8 @@ namespace Filmes_API.Test.Context
             filme.PreviousWin = 2007;
             filme.FollowingWin = 2008;
             filme.Interval = 1;
-            
+            filme.Arquivo = "Arquivo.tes";
+
             var jsonStr = Newtonsoft.Json.JsonConvert.SerializeObject(filme, Newtonsoft.Json.Formatting.Indented);
             HttpContent content = new StringContent(jsonStr, Encoding.UTF8, "application/json");
             var client = application.CreateClient();
@@ -269,7 +274,7 @@ namespace Filmes_API.Test.Context
         public async Task POST_Cadastrar_Filme_Invalido()
         {
             await using var application = new Filmes_API_Application();
-            await Filmes_API_MockBD.CreateFilmes(application, true);
+            await Filmes_API_MockDB.CreateFilmes(application, true);
 
             var url = $"api/v1/filmes/";
 
@@ -278,6 +283,7 @@ namespace Filmes_API.Test.Context
             filme.PreviousWin = 2007;
             filme.FollowingWin = 2008;
             filme.Interval = 1;
+            filme.Arquivo = "Arquivo.tes";
 
             var jsonStr = Newtonsoft.Json.JsonConvert.SerializeObject(filme, Newtonsoft.Json.Formatting.Indented);
             HttpContent content = new StringContent(jsonStr, Encoding.UTF8, "application/json");
@@ -296,15 +302,16 @@ namespace Filmes_API.Test.Context
         public async Task POST_Cadastrar_Filme_FollowingWin_Igual_PreviousWin()
         {
             await using var application = new Filmes_API_Application();
-            await Filmes_API_MockBD.CreateFilmes(application, true);
+            await Filmes_API_MockDB.CreateFilmes(application, true);
 
-            var url = $"api/v1/filmes/";
+            var url = $"api/v1/Filmes";
 
             var filme = new Filme();
             filme.Producer = "Producer99";
             filme.PreviousWin = 2007;
             filme.FollowingWin = 2007;
             filme.Interval = 1;
+            filme.Arquivo = "Arquivo.tes";
 
             var jsonStr = Newtonsoft.Json.JsonConvert.SerializeObject(filme, Newtonsoft.Json.Formatting.Indented);
             HttpContent content = new StringContent(jsonStr, Encoding.UTF8, "application/json");
@@ -324,7 +331,7 @@ namespace Filmes_API.Test.Context
         public async Task POST_Cadastrar_Filme_FollowingWin_Menor_PreviousWin()
         {
             await using var application = new Filmes_API_Application();
-            await Filmes_API_MockBD.CreateFilmes(application, true);
+            await Filmes_API_MockDB.CreateFilmes(application, true);
 
             var url = $"api/v1/filmes/";
 
@@ -333,6 +340,7 @@ namespace Filmes_API.Test.Context
             filme.PreviousWin = 2007;
             filme.FollowingWin = 2006;
             filme.Interval = 1;
+            filme.Arquivo = "Arquivo.tes";
 
             var jsonStr = Newtonsoft.Json.JsonConvert.SerializeObject(filme, Newtonsoft.Json.Formatting.Indented);
             HttpContent content = new StringContent(jsonStr, Encoding.UTF8, "application/json");
@@ -352,7 +360,7 @@ namespace Filmes_API.Test.Context
         public async Task DELETE_Excluir_Filme_PorId_Valido()
         {
             await using var application = new Filmes_API_Application();
-            await Filmes_API_MockBD.CreateFilmes(application, true);
+            await Filmes_API_MockDB.CreateFilmes(application, true);
 
             var id = 1;
             var url = $"api/v1/filmes/{id}";
@@ -374,7 +382,7 @@ namespace Filmes_API.Test.Context
         public async Task DELETE_Excluir_Filme_PorId_Invalido()
         {
             await using var application = new Filmes_API_Application();
-            await Filmes_API_MockBD.CreateFilmes(application, true);
+            await Filmes_API_MockDB.CreateFilmes(application, true);
 
             var id = 99;
             var url = $"api/v1/filmes/{id}";

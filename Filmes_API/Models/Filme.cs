@@ -1,6 +1,5 @@
 ﻿using Swashbuckle.AspNetCore.Annotations;
 using System.ComponentModel.DataAnnotations;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Filmes_API.Models
 {
@@ -21,5 +20,9 @@ namespace Filmes_API.Models
         [Required]
         [SwaggerSchema(Description = "Intervalo entre prêmios")]
         public int Interval { get; set; }
+
+        [Required]
+        [SwaggerSchema(Description = "Arquivo processado")]
+        public string Arquivo { get; set; }
     }
 }

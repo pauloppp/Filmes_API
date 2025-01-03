@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Filmes_API.Test.Context
 {
-    public class Filmes_API_MockBD
+    public class Filmes_API_MockDB
     {
         public static async Task CreateFilmes(Filmes_API_Application application, bool create)
         {
