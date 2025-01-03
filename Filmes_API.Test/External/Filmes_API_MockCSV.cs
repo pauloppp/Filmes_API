@@ -15,7 +15,8 @@ namespace Filmes_API.Test.External
     {
         public static async Task<string> ReadFilmesCSV(Filmes_API_Application application, bool read, string arquivoFilme)
         {
-            Erro retorno = null;
+            var retorno = new List<Erro>();
+            //Erro retorno = null;
             using (var scope = application.Services.CreateScope())
             {
                 var provider = scope.ServiceProvider;
@@ -23,9 +24,11 @@ namespace Filmes_API.Test.External
                 {
                     if (read)
                     {
-                        retorno = CommonServices.AdicionarDadosIniciais(apiContext, arquivoFilme);
+                        retorno = CommonServices.AdicionarDadosIniciais_2(apiContext, arquivoFilme);
+                        var teste = "";
+                        //retorno = CommonServices.AdicionarDadosIniciais(apiContext, arquivoFilme);
                     }
-                    return await Task.FromResult(retorno.Mensagem);
+                    return await Task.FromResult(retorno.FirstOrDefault().Mensagem);
                 }
             }
         }

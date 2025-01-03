@@ -35,7 +35,13 @@ var app = builder.Build();
 var scopo = app.Services.CreateScope();
 ApiContext context = scopo.ServiceProvider.GetRequiredService<ApiContext>();
 var nomeFilme = string.Empty;
-CommonServices.AdicionarDadosIniciais(context, nomeFilme);
+
+// Retorna um erro por tentativa de processamento.
+//CommonServices.AdicionarDadosIniciais(context, nomeFilme);
+
+// Retorna todos os erros de todos os arquivos para processamento.
+CommonServices.AdicionarDadosIniciais_2(context, nomeFilme);
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment() || app.Environment.IsProduction())

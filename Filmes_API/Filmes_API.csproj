@@ -11,10 +11,16 @@
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Include="Data\Principal\Filmes_20241215.csv">
+      <EmbeddedResource Include="Data\Principal\Filmes2.csv">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
       <EmbeddedResource Include="Data\Principal\Filmes.csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Data\Tests\Filmes_Arquivo_Processado_Com_Status_Igual_TRES.csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Data\Tests\Filmes_Arquivo_Processado_Com_Status_Igual_DOIS.csv">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
       <EmbeddedResource Include="Data\Tests\Filmes_Arquivo_Processado_Com_Successo.csv">

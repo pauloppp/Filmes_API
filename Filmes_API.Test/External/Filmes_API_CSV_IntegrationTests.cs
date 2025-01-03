@@ -16,7 +16,8 @@ namespace Filmes_API.Test.External
             await using var application = new Filmes_API_Application();
             var arqFilmes = "Filme.csv";
             var msgResultado = await Filmes_API_MockCSV.ReadFilmesCSV(application, true, arqFilmes);
-            var msgEsperada = nameof(StatusErro.Arquivo_Nao_Encontrado);
+            msgResultado = msgResultado.Split(":").First().Trim();
+            var msgEsperada = nameof(EStatusErro.Arquivo_Nao_Encontrado);
 
             Assert.IsTrue(msgEsperada is not null);
             Assert.AreEqual(msgEsperada, msgResultado);
@@ -28,7 +29,9 @@ namespace Filmes_API.Test.External
             await using var application = new Filmes_API_Application();
             var arqFilmes = "Filmes_Arquivo_Processado_Com_Successo.csv";
             var msgResultado = await Filmes_API_MockCSV.ReadFilmesCSV(application, true, arqFilmes);
-            var msgEsperada = nameof(StatusErro.Arquivo_Processado_Com_Sucesso);
+            msgResultado = msgResultado.Split(":").First().Trim();
+            var msgEsperada = nameof(EStatusErro.Arquivo_Processado_Com_Sucesso);
+
 
             Assert.IsTrue(msgEsperada is not null);
             Assert.AreEqual(msgEsperada, msgResultado);
@@ -41,7 +44,7 @@ namespace Filmes_API.Test.External
             var arqFilmes = "Filmes_SemProducer_Linha1.csv";
             var resultado = await Filmes_API_MockCSV.ReadFilmesCSV(application, true, arqFilmes);
             var msgResultado = resultado.Split(":").First().Trim();
-            var msgEsperada = nameof(StatusErro.Producer_Obrigatorio);
+            var msgEsperada = nameof(EStatusErro.Producer_Obrigatorio);
 
             Assert.IsTrue(msgEsperada is not null);
             Assert.AreEqual(msgEsperada, msgResultado);
@@ -54,7 +57,7 @@ namespace Filmes_API.Test.External
             var arqFilmes = "Filmes_SemPreviousWin_Linha1.csv";
             var resultado = await Filmes_API_MockCSV.ReadFilmesCSV(application, true, arqFilmes);
             var msgResultado = resultado.Split(":").First().Trim();
-            var msgEsperada = nameof(StatusErro.PreviousWin_Obrigatorio);
+            var msgEsperada = nameof(EStatusErro.PreviousWin_Obrigatorio);
 
             Assert.IsTrue(msgEsperada is not null);
             Assert.AreEqual(msgEsperada, msgResultado);
@@ -67,7 +70,7 @@ namespace Filmes_API.Test.External
             var arqFilmes = "Filmes_SemFollowingWin_Linha1.csv";
             var resultado = await Filmes_API_MockCSV.ReadFilmesCSV(application, true, arqFilmes);
             var msgResultado = resultado.Split(":").First().Trim();
-            var msgEsperada = nameof(StatusErro.FollowingWin_Obrigatorio);
+            var msgEsperada = nameof(EStatusErro.FollowingWin_Obrigatorio);
 
             Assert.IsTrue(msgEsperada is not null);
             Assert.AreEqual(msgEsperada, msgResultado);
@@ -80,7 +83,7 @@ namespace Filmes_API.Test.External
             var arqFilmes = "Filmes_FollowingWin_Igual_PreviousWin_Linha1.csv";
             var resultado = await Filmes_API_MockCSV.ReadFilmesCSV(application, true, arqFilmes);
             var msgResultado = resultado.Split(":").First().Trim();
-            var msgEsperada = nameof(StatusErro.FollowingWin_Igual_PreviousWin);
+            var msgEsperada = nameof(EStatusErro.FollowingWin_Igual_PreviousWin);
 
             Assert.IsTrue(msgEsperada is not null);
             Assert.AreEqual(msgEsperada, msgResultado);
@@ -93,7 +96,7 @@ namespace Filmes_API.Test.External
             var arqFilmes = "Filmes_FollowingWin_Menor_PreviousWin_Linha1.csv";
             var resultado = await Filmes_API_MockCSV.ReadFilmesCSV(application, true, arqFilmes);
             var msgResultado = resultado.Split(":").First().Trim();
-            var msgEsperada = nameof(StatusErro.FollowingWin_Menor_PreviousWin);
+            var msgEsperada = nameof(EStatusErro.FollowingWin_Menor_PreviousWin);
 
             Assert.IsTrue(msgEsperada is not null);
             Assert.AreEqual(msgEsperada, msgResultado);
@@ -106,7 +109,7 @@ namespace Filmes_API.Test.External
             var arqFilmes = "Filmes_Arquivo_Vazio_Invalido.csv";
             var resultado = await Filmes_API_MockCSV.ReadFilmesCSV(application, true, arqFilmes);
             var msgResultado = resultado.Split(":").First().Trim();
-            var msgEsperada = nameof(StatusErro.Arquivo_Vazio_Invalido);
+            var msgEsperada = nameof(EStatusErro.Arquivo_Vazio_Invalido);
 
             Assert.IsTrue(msgEsperada is not null);
             Assert.AreEqual(msgEsperada, msgResultado);
@@ -119,7 +122,33 @@ namespace Filmes_API.Test.External
             var arqFilmes = "Filmes_Arquivo_Incompleto.csv";
             var resultado = await Filmes_API_MockCSV.ReadFilmesCSV(application, true, arqFilmes);
             var msgResultado = resultado.Split(":").First().Trim();
-            var msgEsperada = nameof(StatusErro.Arquivo_Incompleto);
+            var msgEsperada = nameof(EStatusErro.Arquivo_Incompleto);
+
+            Assert.IsTrue(msgEsperada is not null);
+            Assert.AreEqual(msgEsperada, msgResultado);
+        }
+
+        [Test]
+        public async Task Retornar_ArquivoCSV_JaProcessado()
+        {
+            await using var application = new Filmes_API_Application();
+            var arqFilmes = "Filmes_Arquivo_Processado_Com_Status_Igual_DOIS.csv";
+            var resultado = await Filmes_API_MockCSV.ReadFilmesCSV(application, true, arqFilmes);
+            var msgResultado = resultado.Split(":").First().Trim();
+            var msgEsperada = nameof(EStatusErro.Arquivo_JaProcessado);
+
+            Assert.IsTrue(msgEsperada is not null);
+            Assert.AreEqual(msgEsperada, msgResultado);
+        }
+
+        [Test]
+        public async Task Retornar_ArquivoCSV_JaProcessado_Com_Erro()
+        {
+            await using var application = new Filmes_API_Application();
+            var arqFilmes = "Filmes_Arquivo_Processado_Com_Status_Igual_TRES.csv";
+            var resultado = await Filmes_API_MockCSV.ReadFilmesCSV(application, true, arqFilmes);
+            var msgResultado = resultado.Split(":").First().Trim();
+            var msgEsperada = nameof(EStatusErro.Arquivo_JaProcessado_Com_Erro);
 
             Assert.IsTrue(msgEsperada is not null);
             Assert.AreEqual(msgEsperada, msgResultado);

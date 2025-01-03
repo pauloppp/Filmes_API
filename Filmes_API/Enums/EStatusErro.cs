@@ -1,6 +1,6 @@
 ﻿namespace Filmes_API.Enums
 {
-    public enum StatusErro
+    public enum EStatusErro
     {
         Arquivo_Nao_Encontrado = 0,
         Arquivo_Vazio_Invalido = 1,
@@ -11,5 +11,7 @@
         FollowingWin_Menor_PreviousWin = 6,
         Arquivo_Processado_Com_Sucesso = 7,
         Arquivo_Incompleto = 8,
+        Arquivo_JaProcessado = 9,
+        Arquivo_JaProcessado_Com_Erro = 10,
     }
 }
